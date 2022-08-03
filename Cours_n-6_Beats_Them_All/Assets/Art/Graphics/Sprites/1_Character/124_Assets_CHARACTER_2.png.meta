@@ -67,7 +67,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
@@ -2883,9 +2883,9 @@ TextureImporter:
       124_Assets_CHARACTER_2_59: -1124617784
       124_Assets_CHARACTER_2_73: 2132613681
       124_Assets_CHARACTER_2_41: 1147282206
-      124_Assets_CHARACTER_2_15: 1116198431
-      124_Assets_CHARACTER_2_80: 2053893406
       124_Assets_CHARACTER_2_126: -1416964324
+      124_Assets_CHARACTER_2_80: 2053893406
+      124_Assets_CHARACTER_2_15: 1116198431
       124_Assets_CHARACTER_2_0: -19814874
       124_Assets_CHARACTER_2_110: -1139684326
       124_Assets_CHARACTER_2_19: -1727076346

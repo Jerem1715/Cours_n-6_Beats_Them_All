@@ -67,7 +67,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
@@ -2989,11 +2989,10 @@ TextureImporter:
       68_Assets_STINKUBUS_3_7: 2059914467
       68_Assets_STINKUBUS_3_18: 1580595585
       68_Assets_STINKUBUS_3_27: -162373975
-      68_Assets_STINKUBUS_3_45: 1569491748
       68_Assets_STINKUBUS_3_127: -1059548942
       68_Assets_STINKUBUS_3_34: 356365200
       68_Assets_STINKUBUS_3_117: 1455132930
-      68_Assets_STINKUBUS_3_90: 1407606202
+      68_Assets_STINKUBUS_3_45: 1569491748
       68_Assets_STINKUBUS_3_105: 144074468
       68_Assets_STINKUBUS_3_32: -1044121060
       68_Assets_STINKUBUS_3_29: 1346013819
@@ -3002,6 +3001,7 @@ TextureImporter:
       68_Assets_STINKUBUS_3_125: -1105499333
       68_Assets_STINKUBUS_3_0: -1123525754
       68_Assets_STINKUBUS_3_118: 632488190
+      68_Assets_STINKUBUS_3_90: 1407606202
       68_Assets_STINKUBUS_3_23: -707192485
       68_Assets_STINKUBUS_3_54: 1818682526
       68_Assets_STINKUBUS_3_13: -1181554625
