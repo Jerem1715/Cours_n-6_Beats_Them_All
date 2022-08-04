@@ -123,8 +123,8 @@ TextureImporter:
         y: 192
         width: 96
         height: 96
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2814,13 +2814,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      133_Assets_CHARACTER_1_10: -1439263265
+      133_Assets_CHARACTER_1_16: 317684600
       133_Assets_CHARACTER_1_19: -590730086
       133_Assets_CHARACTER_1_104: -178000567
       133_Assets_CHARACTER_1_85: 145873412
       133_Assets_CHARACTER_1_66: -480379895
       133_Assets_CHARACTER_1_99: -1864818186
-      133_Assets_CHARACTER_1_45: -1394124640
+      133_Assets_CHARACTER_1_38: -1446768052
       133_Assets_CHARACTER_1_61: 406132511
       133_Assets_CHARACTER_1_81: -1896303531
       133_Assets_CHARACTER_1_39: 7883111
@@ -2940,8 +2940,8 @@ TextureImporter:
       133_Assets_CHARACTER_1_41: 1979579581
       133_Assets_CHARACTER_1_55: -289228609
       133_Assets_CHARACTER_1_21: -32633576
-      133_Assets_CHARACTER_1_38: -1446768052
-      133_Assets_CHARACTER_1_16: 317684600
+      133_Assets_CHARACTER_1_10: -1439263265
+      133_Assets_CHARACTER_1_45: -1394124640
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
