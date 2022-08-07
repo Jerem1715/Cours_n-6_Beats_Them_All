@@ -27,6 +27,7 @@ public class Enemy1SM : MonoBehaviour
     [SerializeField] float posEnemyDetect;
     [SerializeField] float range = 3f;
 
+
     Rigidbody2D rb2D;
 
     Vector2 enemyDir;
@@ -39,10 +40,25 @@ public class Enemy1SM : MonoBehaviour
     float distancePlayerToEnemy;
 
 
+    //Saut
+    [SerializeField] AnimationCurve jumpCurve;
+    [SerializeField] float jumpHeight = 2f;
+    [SerializeField] float jumpDuration = 2f;
+    Transform graphics;
+    float jumpTimer;
+
+
+    //Awake is called before Start
+    private void Awake()
+    {
+        graphics = transform.Find("GraphicsE1");
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        //On récupère le rigidbody du player
+        //On récupère le rigidbody de l'ennemi
         rb2D = GetComponent<Rigidbody2D>();
 
         //rb2D.AddForce(startForce * speedInit, ForceMode.Impulse);
@@ -62,9 +78,15 @@ public class Enemy1SM : MonoBehaviour
 
         distancePlayerToEnemy = Vector2.Distance(player.transform.position, transform.position);
 
+        //Permet aux sprites de se retourner à 180°
         if (rb2D.velocity.x < 0)
         {
             transform.eulerAngles = new Vector2(0, -180);
+        }
+
+        if (rb2D.velocity.x > 0)
+        {
+            transform.eulerAngles = new Vector2(0, 0);
         }
 
         
@@ -176,10 +198,10 @@ public class Enemy1SM : MonoBehaviour
                 break;
             case Enemy1State.JUMPUP:
 
-                if (rb2D.velocity.y == 0)
-                {
-                    TransitionToState(Enemy1State.IDLE);
-                }
+                //if (rb2D.velocity.y == 0)
+                //{
+                //    TransitionToState(Enemy1State.IDLE);
+                //}
 
                 break;
             case Enemy1State.JUMPMAX:
@@ -200,7 +222,7 @@ public class Enemy1SM : MonoBehaviour
                 break;
             case Enemy1State.ATTACK1:
 
-
+                
 
                 break;
             case Enemy1State.ATTACK2:
@@ -234,9 +256,24 @@ public class Enemy1SM : MonoBehaviour
                 }
 
 
-
                 break;
             case Enemy1State.JUMPUP:
+
+                //On code le saut 
+                if (jumpTimer < jumpDuration)
+                {
+                    jumpTimer += Time.deltaTime;
+
+                    //Progression / maximum = %
+                    float y = jumpCurve.Evaluate(jumpTimer / jumpDuration);
+
+                    graphics.localPosition = new Vector3(transform.localPosition.x, y * jumpHeight, transform.localPosition.z);
+                }
+                else
+                {
+                    jumpTimer = 0f;
+                }
+
                 break;
             case Enemy1State.JUMPMAX:
                 break;
