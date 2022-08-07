@@ -66,7 +66,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 1
     textureFormat: 4
     textureCompression: 1
@@ -123,8 +123,8 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -161,7 +161,7 @@ TextureImporter:
       name: 90_Assets_ENEMY_2_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 130
         y: 0
         width: 64
         height: 64
