@@ -131,12 +131,24 @@ public class PlayerSM : MonoBehaviour
 
                 break;
             case Player1State.ATTACK1:
+
+                animator.SetBool("ATTACK1", true);
+
                 break;
             case Player1State.ATTACK2:
+
+                animator.SetBool("ATTACK2", true);
+
                 break;
             case Player1State.ATTACK3:
+
+                animator.SetBool("ATTACK3", true);
+
                 break;
             case Player1State.ATTACK4:
+
+                animator.SetBool("ATTACK4", true);
+
                 break;
             case Player1State.SPRINT:
 
@@ -212,6 +224,13 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.WALK);
                 }
 
+                //To Attack
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TransitionToState(Player1State.ATTACK1);
+                }
+
+                //To jump
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     TransitionToState(Player1State.JUMPUP);
@@ -232,12 +251,56 @@ public class PlayerSM : MonoBehaviour
 
                 break;
             case Player1State.ATTACK1:
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TransitionToState(Player1State.ATTACK2);
+                }
+
+                if (!Input.GetKey(KeyCode.E))
+                {
+                    StartCoroutine(GoIdle());
+                }
+
                 break;
             case Player1State.ATTACK2:
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TransitionToState(Player1State.ATTACK3);
+                }
+
+                if (!Input.GetKey(KeyCode.E))
+                {
+                    StartCoroutine(GoIdle());
+                }
+
                 break;
             case Player1State.ATTACK3:
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TransitionToState(Player1State.ATTACK4);
+                }
+
+                if (!Input.GetKey(KeyCode.E))
+                {
+                    StartCoroutine(GoIdle());
+                }
+
                 break;
             case Player1State.ATTACK4:
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TransitionToState(Player1State.ATTACK1);
+                }
+
+                if (!Input.GetKey(KeyCode.E))
+                {
+                    StartCoroutine(GoIdle());
+                }
+
                 break;
             case Player1State.SPRINT:
 
@@ -412,12 +475,24 @@ public class PlayerSM : MonoBehaviour
 
                 break;
             case Player1State.ATTACK1:
+
+                animator.SetBool("ATTACK1", false);
+
                 break;
             case Player1State.ATTACK2:
+
+                animator.SetBool("ATTACK2", false);
+
                 break;
             case Player1State.ATTACK3:
+
+                animator.SetBool("ATTACK3", false);
+
                 break;
             case Player1State.ATTACK4:
+
+                animator.SetBool("ATTACK4", false);
+
                 break;
             case Player1State.SPRINT:
 
