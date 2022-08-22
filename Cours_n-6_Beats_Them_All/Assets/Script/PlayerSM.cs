@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerSM : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class PlayerSM : MonoBehaviour
         AIRATTACK4,
         DIVE,
         GROUNDPOUND,
-        HURT,
+        HURT, //TAFF //Perte de point //mort
         AIRHURT,
         CANPICKUP,
         CANIDLE,
@@ -54,7 +55,16 @@ public class PlayerSM : MonoBehaviour
     public Player1State currentState;
 
 
-    //Saut
+    [Header("HEALTH")]
+    [SerializeField] DataScriptable healthData;
+    [SerializeField] TextMeshProUGUI lifeUI;
+
+    int health;
+
+    bool isDead;
+
+    [Header("JUMP")]
+    
     [SerializeField] AnimationCurve jumpCurve;
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] float jumpDuration = 2f;
@@ -156,6 +166,10 @@ public class PlayerSM : MonoBehaviour
 
                 break;
             case Player1State.JUMPUP:
+
+                jumpTimer = 0f;
+                animator.SetBool("JUMPUP", true);
+
                 break;
             case Player1State.JUMPMAX:
                 break;
@@ -176,6 +190,9 @@ public class PlayerSM : MonoBehaviour
             case Player1State.GROUNDPOUND:
                 break;
             case Player1State.HURT:
+
+                animator.SetBool("HURT", true);
+
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -236,6 +253,15 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.JUMPUP);
                 }
 
+
+                //To Hurt
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    TransitionToState(Player1State.HURT);
+                }
+
+
+
                 break;
             case Player1State.WALK:
 
@@ -247,6 +273,12 @@ public class PlayerSM : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     TransitionToState(Player1State.SPRINT);
+                }
+
+                //To jump
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    TransitionToState(Player1State.JUMPUP);
                 }
 
                 break;
@@ -309,8 +341,21 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.WALK);
                 }
 
+                //To jump
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    TransitionToState(Player1State.JUMPUP);
+                }
+
                 break;
             case Player1State.JUMPUP:
+
+                if (jumpTimer > jumpDuration)
+                {
+                    TransitionToState(Player1State.IDLE);
+                }
+
+
                 break;
             case Player1State.JUMPMAX:
                 break;
@@ -331,6 +376,12 @@ public class PlayerSM : MonoBehaviour
             case Player1State.GROUNDPOUND:
                 break;
             case Player1State.HURT:
+
+                if (!Input.GetKey(KeyCode.F))
+                {
+                    TransitionToState(Player1State.IDLE);
+                }
+
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -402,10 +453,9 @@ public class PlayerSM : MonoBehaviour
                     //Progression / maximum = %
                     float y = jumpCurve.Evaluate(jumpTimer / jumpDuration);
 
-                    graphics.localPosition = new Vector3(transform.localPosition.x, y * jumpHeight, transform.localPosition.z);
+                    graphics.localPosition = new Vector3(graphics.localPosition.x, y * jumpHeight, graphics.localPosition.z);
                 }
-
-                StartCoroutine(GoIdle());
+                
 
                 break;
             case Player1State.JUMPMAX:
@@ -500,6 +550,9 @@ public class PlayerSM : MonoBehaviour
 
                 break;
             case Player1State.JUMPUP:
+
+                animator.SetBool("JUMPUP", false);
+
                 break;
             case Player1State.JUMPMAX:
                 break;
@@ -520,6 +573,9 @@ public class PlayerSM : MonoBehaviour
             case Player1State.GROUNDPOUND:
                 break;
             case Player1State.HURT:
+
+                animator.SetBool("HURT", false);
+
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -567,7 +623,7 @@ public class PlayerSM : MonoBehaviour
 
     IEnumerator GoIdle()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         TransitionToState(Player1State.IDLE);
     }
