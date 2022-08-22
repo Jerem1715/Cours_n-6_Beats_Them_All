@@ -354,13 +354,13 @@ public class Enemy1SM : MonoBehaviour
 //if (Vector3.Distance(player.transform.position, transform.position) <= range)
 //{
 //    //go to player
-//    Vector3 dirMove = player.transform.position - transform.position;
+//    Vector3 dirToPlayer = player.transform.position - transform.position;
 //
 //    //change position y de l'enemie
 //    Vector3 replacePosEnemy = transform.position;
 //    replacePosEnemy.y = posEnemyDetect;
 //
-//    rb2D.velocity = dirMove.normalized * speedEnemyDetect;
+//    rb2D.velocity = dirToPlayer.normalized * speedEnemyDetect;
 //
 //    transform.LookAt(player.transform.position);
 //}
