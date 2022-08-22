@@ -19,9 +19,9 @@ public class CameraPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        //Follow();
+        Follow();
         //MoveToPlayer();
-        FollowClamp();
+        //FollowClamp();
     }
 
     private void Follow()
