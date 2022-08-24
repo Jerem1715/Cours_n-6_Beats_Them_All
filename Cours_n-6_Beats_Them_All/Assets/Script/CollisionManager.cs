@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    [SerializeField] int damage = 1;
+    //[SerializeField] int damage = 1;
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
@@ -12,7 +12,7 @@ public class CollisionManager : MonoBehaviour
         if (collision.gameObject.tag=="Enemy")
         {
             Debug.Log("enemy touché");
-            collision.gameObject.GetComponent<Enemy2SM>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Enemy2SM>().TakeDamage(/*damage*/);
         }
 
         //dégât du player
