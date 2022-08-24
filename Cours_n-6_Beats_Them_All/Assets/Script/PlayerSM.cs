@@ -72,6 +72,7 @@ public class PlayerSM : MonoBehaviour
     float jumpTimer;
 
 
+
     //Awake is called before Start
     private void Awake()
     {
@@ -596,6 +597,7 @@ public class PlayerSM : MonoBehaviour
             case Player1State.CANSPRINT:
                 break;
             case Player1State.DEATH:
+                animator.SetBool("DEATH", false);
                 break;
             case Player1State.VICTORY:
                 break;
@@ -627,5 +629,10 @@ public class PlayerSM : MonoBehaviour
 
         TransitionToState(Player1State.IDLE);
     }
+  
+   
+
+    //ajout d'un score 
+    //GameManager.instance.AddScore(score);
 
 }
