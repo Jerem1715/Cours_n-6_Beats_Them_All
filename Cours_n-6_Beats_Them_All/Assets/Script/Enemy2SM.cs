@@ -95,6 +95,9 @@ public class Enemy2SM : MonoBehaviour
     void OnStateFixedUpdate()
     {
         distanceToPlayer = Vector2.Distance(player1.transform.position, transform.position);
+        Debug.Log("distance vers le player: " + distanceToPlayer);
+
+
         switch (currentState)
         {
             case Enemy2Stat.IDLE:
@@ -102,6 +105,7 @@ public class Enemy2SM : MonoBehaviour
             case Enemy2Stat.WALK:
 
                 rb2D.velocity = dirMoveNormalized * walkSpeed;
+                Debug.Log("rb2d : " + rb2D.velocity);
 
                 break;
             case Enemy2Stat.ATTACK1:
@@ -128,6 +132,7 @@ public class Enemy2SM : MonoBehaviour
 
             case Enemy2Stat.WALK:
                 animator.SetBool("WALK", true);
+               
                 break;
 
             case Enemy2Stat.ATTACK1:
@@ -157,9 +162,12 @@ public class Enemy2SM : MonoBehaviour
         switch (currentState)
         {
             case Enemy2Stat.IDLE:
-                if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRange)
-                    TransitionToState(Enemy2Stat.WALK);
 
+                if (distanceToPlayer <= detectionRadius && distanceToPlayer > attackRange)
+                {
+                    TransitionToState(Enemy2Stat.WALK);
+                    //Debug.Log("rb2d : " + rb2D.velocity);
+                }
                 if (distanceToPlayer <= attackRange)
                     TransitionToState(Enemy2Stat.ATTACK1);
 
