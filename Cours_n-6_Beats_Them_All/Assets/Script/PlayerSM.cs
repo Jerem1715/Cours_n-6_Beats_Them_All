@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class PlayerSM : MonoBehaviour
@@ -43,15 +42,13 @@ public class PlayerSM : MonoBehaviour
         CHARACTERSELECT
     }
 
-    [SerializeField] Animator animator;
 
-    [Header("MOVE")]
+    [SerializeField] Animator animator;
     [SerializeField] float speed;
     [SerializeField] float sprintSpeed;
 
     Vector2 dirInput;
 
-    bool onCollision;
 
     Rigidbody2D rb2D;
 
@@ -61,10 +58,9 @@ public class PlayerSM : MonoBehaviour
     [Header("HEALTH")]
     [SerializeField] DataScriptable healthData;
     [SerializeField] TextMeshProUGUI lifeUI;
-    [SerializeField] public int health;
-    [SerializeField] public int healthMax;
-    [SerializeField] HealthBar healthBar;
-   
+
+    int health;
+
     bool isDead;
 
     [Header("JUMP")]
@@ -74,6 +70,7 @@ public class PlayerSM : MonoBehaviour
     [SerializeField] float jumpDuration = 2f;
     Transform graphics;
     float jumpTimer;
+
 
 
     //Awake is called before Start
@@ -95,7 +92,6 @@ public class PlayerSM : MonoBehaviour
 
         //On lance la fonction
         OnStateEnter();
-
     }
 
     // Update is called once per frame
@@ -120,13 +116,6 @@ public class PlayerSM : MonoBehaviour
         if (rb2D.velocity.x > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
-        }
-
-        //On lie la vie du player au canvas 
-        if (gameObject.tag == "Player")
-        {
-            lifeUI.text = $"Life : {health}";
-            //healthBar = ;
         }
 
 
@@ -205,10 +194,6 @@ public class PlayerSM : MonoBehaviour
 
                 animator.SetBool("HURT", true);
 
-                TakeDamage(1);
-
-                TransitionToState(Player1State.IDLE);
-
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -229,9 +214,6 @@ public class PlayerSM : MonoBehaviour
             case Player1State.CANSPRINT:
                 break;
             case Player1State.DEATH:
-
-                StartCoroutine(Destroy());
-
                 break;
             case Player1State.VICTORY:
                 break;
@@ -274,17 +256,11 @@ public class PlayerSM : MonoBehaviour
 
 
                 //To Hurt
-                //if (onCollision == true)
-                //{
-                //    TransitionToState(Player1State.HURT);
-                //}
-                
-
-                //To Death
-                if (health <= 0)
+                if (Input.GetKeyDown(KeyCode.F))
                 {
-                    TransitionToState(Player1State.DEATH);
+                    TransitionToState(Player1State.HURT);
                 }
+
 
 
                 break;
@@ -305,13 +281,6 @@ public class PlayerSM : MonoBehaviour
                 {
                     TransitionToState(Player1State.JUMPUP);
                 }
-
-                //To Death
-                if (health <= 0)
-                {
-                    TransitionToState(Player1State.DEATH);
-                }
-
 
                 break;
             case Player1State.ATTACK1:
@@ -379,12 +348,6 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.JUMPUP);
                 }
 
-                //To Death
-                if (health <= 0)
-                {
-                    TransitionToState(Player1State.DEATH);
-                }
-
                 break;
             case Player1State.JUMPUP:
 
@@ -393,11 +356,7 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.IDLE);
                 }
 
-                //To Death
-                if (health <= 0)
-                {
-                    TransitionToState(Player1State.DEATH);
-                }
+
                 break;
             case Player1State.JUMPMAX:
                 break;
@@ -419,12 +378,7 @@ public class PlayerSM : MonoBehaviour
                 break;
             case Player1State.HURT:
 
-                if (onCollision == true)
-                {
-                    
-                }
-
-                if (onCollision == false)
+                if (!Input.GetKey(KeyCode.F))
                 {
                     TransitionToState(Player1State.IDLE);
                 }
@@ -643,9 +597,7 @@ public class PlayerSM : MonoBehaviour
             case Player1State.CANSPRINT:
                 break;
             case Player1State.DEATH:
-
                 animator.SetBool("DEATH", false);
-
                 break;
             case Player1State.VICTORY:
                 break;
@@ -677,37 +629,10 @@ public class PlayerSM : MonoBehaviour
 
         TransitionToState(Player1State.IDLE);
     }
+  
+   
 
-    public void TakeDamage(int damageAmount)
-    {
-        health -= damageAmount;
-        healthBar.UpdateHealth();
-    }
+    //ajout d'un score 
+    //GameManager.instance.AddScore(score);
 
-
-    IEnumerator Destroy()
-    {
-        animator.SetBool("DEATH", true);
-
-        yield return new WaitForSeconds(2f);
-
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
-            onCollision = true;
-
-            TransitionToState(Player1State.HURT);
-            Debug.Log(onCollision);
-        }
-        else
-        {
-            onCollision = false;
-        }
-    }
 }
-
-

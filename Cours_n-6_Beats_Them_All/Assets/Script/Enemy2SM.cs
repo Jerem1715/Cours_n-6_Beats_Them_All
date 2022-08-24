@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy2SM : MonoBehaviour
@@ -9,12 +10,8 @@ public class Enemy2SM : MonoBehaviour
     {
         IDLE,
         WALK,
-        JUMP_DOWN, JUMP_MAX, JUMP_UP,
         ATTACK1, ATTACK2,
-        AIR_ATTACK1, AIR_ATTACK2,
         HURT, //blesser
-        AIR_HURT,
-        THROW, //jeter
         DEATH
     }
 
@@ -28,22 +25,21 @@ public class Enemy2SM : MonoBehaviour
     [Header("OBJECT")]
     [SerializeField] GameObject player1;
     [SerializeField] GameObject attackPoint;
+    [SerializeField] GameObject _DiskPrefab;
 
     [Header("LAYERS")]
     [SerializeField] LayerMask playerLayer;
 
     [Header("SPEED,RANGE")]
-    [SerializeField] float walkSpeed = 2f; //scriptable ?
-    [SerializeField] float jumpSpeed = 5f; //scriptable ?
+    [SerializeField] float walkSpeed = 2f; 
     [SerializeField] float detectionRadius = 3f;
     [SerializeField] float attackDelay = 0.75f;
     [SerializeField] float attackRange = 1f;
-    [SerializeField] AnimationCurve _jumpCurve; 
-    [SerializeField] float jumpTimer = .5f;
-
-    [SerializeField] float health = 3f;
+    [SerializeField] int health = 3;
+    [SerializeField] int score = 750;
     [SerializeField] int damageAmount = 1;
     float distanceToPlayer;
+
 
     [Header("Booleans")]
     bool canAttack = true;
@@ -63,7 +59,6 @@ public class Enemy2SM : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
 
-
         currentState = Enemy2Stat.IDLE;
 
         OnStateEnter();
@@ -71,24 +66,10 @@ public class Enemy2SM : MonoBehaviour
 
     void Update()
     {
-
-        //go to the player
         dirToPlayer = player1.transform.position - transform.position;
         dirMoveNormalized = dirToPlayer.normalized;
 
         Orientation();
-
-        //saut de l'enemy
-        //if (jumpTimer < 1f)
-        //{
-        //    jumpTimer += Time.deltaTime;
-        //    float y =  _jumpCurve .Evaluate(jumpTimer);
-
-        //    animator.transform.position = new Vector3(transform.localPosition.x, y , transform.localPosition.z);
-
-        //    Debug.Log(y);
-        //}
-
 
         OnStateUpdate();
     }
@@ -108,7 +89,6 @@ public class Enemy2SM : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         OnStateFixedUpdate();
     }
 
@@ -130,25 +110,6 @@ public class Enemy2SM : MonoBehaviour
             case Enemy2Stat.ATTACK2:
                 //collision
                 break;
-            case Enemy2Stat.JUMP_DOWN:
-
-                break;
-            case Enemy2Stat.JUMP_MAX:
-
-                break;
-            case Enemy2Stat.JUMP_UP:
-                break;
-            case Enemy2Stat.AIR_ATTACK1:
-                break;
-            case Enemy2Stat.AIR_ATTACK2:
-                break;
-            case Enemy2Stat.HURT:
-
-                break;
-            case Enemy2Stat.AIR_HURT:
-                break;
-            case Enemy2Stat.THROW:
-                break;
             case Enemy2Stat.DEATH:
                 break;
             default:
@@ -161,7 +122,7 @@ public class Enemy2SM : MonoBehaviour
         switch (currentState)
         {
             case Enemy2Stat.IDLE:
-               
+
                 rb2D.velocity = Vector2.zero;
                 break;
 
@@ -175,36 +136,16 @@ public class Enemy2SM : MonoBehaviour
                 StartCoroutine(Attack());
 
                 break;
+            case Enemy2Stat.HURT:
+
+                animator.SetTrigger("HURT");
+                break;
             case Enemy2Stat.ATTACK2:
                 break;
-            case Enemy2Stat.AIR_ATTACK1:
-                break;
-            case Enemy2Stat.AIR_ATTACK2:
-                break;
-            case Enemy2Stat.JUMP_DOWN:
-                //ref sauter bas
-              
-                break;
-            case Enemy2Stat.JUMP_MAX:
-                //ref sauter maximum
-                break;
-            case Enemy2Stat.JUMP_UP:
-                //ref sauter basiq ?
-                break;
-            case Enemy2Stat.HURT:
-                
-                if (collisionPlayer.gameObject.tag == "Player")
-                {
-                   player1.GetComponent<EnemyHealth>().TakeDamage(damageAmount);
-                }
-
-                break;
-            case Enemy2Stat.AIR_HURT:
-                break;
-            case Enemy2Stat.THROW:
-                //jeter
-                break;
             case Enemy2Stat.DEATH:
+                rb2D.velocity = Vector2.zero;   
+                StartCoroutine(DestroyEnemy());
+
                 break;
             default:
                 break;
@@ -222,11 +163,10 @@ public class Enemy2SM : MonoBehaviour
                 if (distanceToPlayer <= attackRange)
                     TransitionToState(Enemy2Stat.ATTACK1);
 
-
                 break;
             case Enemy2Stat.WALK:
 
-                if (distanceToPlayer <= attackRange )
+                if (distanceToPlayer <= attackRange)
                     TransitionToState(Enemy2Stat.ATTACK1);
 
                 //if (distanceToPlayer <= attackRange && RandomAttack() == 1)
@@ -235,12 +175,6 @@ public class Enemy2SM : MonoBehaviour
                 if (distanceToPlayer >= detectionRadius)
                     TransitionToState(Enemy2Stat.IDLE);
 
-                break;
-            case Enemy2Stat.JUMP_DOWN:
-                break;
-            case Enemy2Stat.JUMP_MAX:
-                break;
-            case Enemy2Stat.JUMP_UP:
                 break;
             case Enemy2Stat.ATTACK1:
 
@@ -266,26 +200,18 @@ public class Enemy2SM : MonoBehaviour
                 //if (distanceToPlayer > detectionRadius)
                 //    TransitionToState(Enemy2Stat.IDLE);
                 #endregion
-
-                break;
-            case Enemy2Stat.AIR_ATTACK1:
-                break;
-            case Enemy2Stat.AIR_ATTACK2:
                 break;
             case Enemy2Stat.HURT:
-                
-                break;
-            case Enemy2Stat.AIR_HURT:
-                break;
-            case Enemy2Stat.THROW:
+                Debug.Log("Mon entrée de Hurt");
+                   
                 break;
             case Enemy2Stat.DEATH:
+               
                 break;
             default:
                 break;
         }
     }
-
 
     void OnStateExit()
     {
@@ -300,31 +226,17 @@ public class Enemy2SM : MonoBehaviour
                 //canAttack = false;
                 break;
             case Enemy2Stat.ATTACK2:
-               
-                break;
-            case Enemy2Stat.JUMP_DOWN:
-                break;
-            case Enemy2Stat.JUMP_MAX:
-                break;
-            case Enemy2Stat.JUMP_UP:
-                break;
-            case Enemy2Stat.AIR_ATTACK1:
-                break;
-            case Enemy2Stat.AIR_ATTACK2:
+
                 break;
             case Enemy2Stat.HURT:
                 break;
-            case Enemy2Stat.AIR_HURT:
-                break;
-            case Enemy2Stat.THROW:
-                break;
             case Enemy2Stat.DEATH:
+                animator.SetBool("DEATH", false);
                 break;
             default:
                 break;
         }
     }
-
 
     void TransitionToState(Enemy2Stat nextState)
     {
@@ -345,17 +257,22 @@ public class Enemy2SM : MonoBehaviour
 
     }
 
+    IEnumerator DestroyEnemy()
+    {
+        //joue l'anim Death
+        animator.SetBool("DEATH", true);
 
+        //attend 2 second
+        yield return new WaitForSeconds(2f);
+
+        // détruit l"objet 
+        Destroy(gameObject);
+
+        //à la supp de l'objet, tu crée un collectible Disk
+        Instantiate(_DiskPrefab, transform.position, Quaternion.identity);
+    }
     IEnumerator Attack()
     {
-        Debug.Log("ATTACK");
-        //Collider2D playerCollider2d = Physics2D.OverlapCircle(attackPoint.transform.position, 1, playerLayer);
-        //if (playerCollider2d != null)
-        //{
-        //    Debug.Log("code qui Inflige des degats");
-
-        //}
-
         canAttack = false;
         //animator.SetBool("ATTACK1", true);
         animator.SetTrigger("ATTACK");
@@ -384,12 +301,39 @@ public class Enemy2SM : MonoBehaviour
         //    canAttack = true;
         //}
         #endregion
-
     }
 
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            //step1
+            //animator.SetTrigger("DEATH");
+            //Destroy(gameObject);
+
+            //step2 avec coroutine
+            StartCoroutine(DestroyEnemy());
+
+        }
+        else
+        {
+            animator.SetBool("HURT",true);
+        }
+    }
+
+  
+        //public void AddScore(int amount) // amount => montant 
+        //{
+        //    score += amount;
+
+        //    //scoreUI.text = "score: " + score.ToString("d5");
+        //    ////lz même opération
+        //    scoreUI.text = $"score: {score.ToString("d5")}";
+        //}
+   
 
     #region fonction aléatoire qui gère les attack 1 et 2
-
     //public float RandomAttack()
     //{
     //    float randomAttack = UnityEngine.Random.Range(0, 2);
