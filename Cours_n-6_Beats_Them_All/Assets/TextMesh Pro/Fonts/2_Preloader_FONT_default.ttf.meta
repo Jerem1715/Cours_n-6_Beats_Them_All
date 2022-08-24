@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eab2d7cc6647c5247af2d8098542eb07
+guid: ea113217b6e32405f9a5e72db59f48cc
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: prstart
+  fontName: default
   fontNames:
-  - prstart
+  - default
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
