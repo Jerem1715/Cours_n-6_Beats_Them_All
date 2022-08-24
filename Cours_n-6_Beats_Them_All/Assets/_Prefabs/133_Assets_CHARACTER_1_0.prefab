@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6938404358910356053}
   - component: {fileID: 6938404358910356052}
   - component: {fileID: 1416314159}
+  - component: {fileID: 1416314164}
   m_Layer: 0
   m_Name: 133_Assets_CHARACTER_1_0
   m_TagString: Player
@@ -53,6 +54,9 @@ MonoBehaviour:
   currentState: 0
   healthData: {fileID: 0}
   lifeUI: {fileID: 0}
+  health: 5
+  healthMax: 5
+  healthBar: {fileID: 0}
   jumpCurve:
     serializedVersion: 2
     m_Curve:
@@ -112,8 +116,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a4d8e71b5073b4492bf70399984261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthData: {fileID: 0}
-  lifeUI: {fileID: 0}
+--- !u!58 &1416314164
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938404358910356046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &6938404359236227833
 GameObject:
   m_ObjectHideFlags: 0
