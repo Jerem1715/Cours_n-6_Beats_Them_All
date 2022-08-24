@@ -3646,5 +3646,6 @@ PrefabInstance:
       propertyPath: lifeUI
       value: 
       objectReference: {fileID: 1240245422}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1416314159, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
