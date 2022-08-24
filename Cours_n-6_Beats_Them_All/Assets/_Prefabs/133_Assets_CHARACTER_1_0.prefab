@@ -128,8 +128,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   currentState: 0
   lifeUI: {fileID: 0}
-  health: 25
-  healthMax: 25
+  health: 5
+  healthMax: 5
   jumpCurve:
     serializedVersion: 2
     m_Curve:

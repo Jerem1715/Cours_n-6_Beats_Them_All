@@ -61,6 +61,8 @@ public class Enemy2SM : MonoBehaviour
 
         currentState = Enemy2Stat.IDLE;
 
+        attackPoint.SetActive(false);
+
         OnStateEnter();
     }
 
@@ -137,6 +139,8 @@ public class Enemy2SM : MonoBehaviour
 
             case Enemy2Stat.ATTACK1:
 
+                attackPoint.SetActive(true);
+
                 rb2D.velocity = Vector2.zero;
                 StartCoroutine(Attack());
 
@@ -146,6 +150,9 @@ public class Enemy2SM : MonoBehaviour
                 animator.SetTrigger("HURT");
                 break;
             case Enemy2Stat.ATTACK2:
+
+                attackPoint.SetActive(true);
+
                 break;
             case Enemy2Stat.DEATH:
                 rb2D.velocity = Vector2.zero;   
@@ -232,9 +239,14 @@ public class Enemy2SM : MonoBehaviour
                 animator.SetBool("WALK", false);
                 break;
             case Enemy2Stat.ATTACK1:
+
+                attackPoint.SetActive(false);
+
                 //canAttack = false;
                 break;
             case Enemy2Stat.ATTACK2:
+
+                attackPoint.SetActive(false);
 
                 break;
             case Enemy2Stat.HURT:
