@@ -13,7 +13,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     [SerializeField] float timerBetweenSpawn = 2f;
     [SerializeField] int spawnCount = 10;
-    [SerializeField] int startSpawnCount = 4;
+    [SerializeField] int startSpawnCount = 2    ;
     Vector2 enemyRandomToSpawn;
     float timer = 0f;
 
