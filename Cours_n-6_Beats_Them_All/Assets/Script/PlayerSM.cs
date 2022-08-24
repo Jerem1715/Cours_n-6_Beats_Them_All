@@ -47,6 +47,7 @@ public class PlayerSM : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] float speed;
     [SerializeField] float sprintSpeed;
+    [SerializeField] GameObject attackPoint;
 
     Vector2 dirInput;
 
@@ -91,6 +92,9 @@ public class PlayerSM : MonoBehaviour
 
         //On applique un état de base 
         currentState = Player1State.IDLE;
+
+        //On désactive l'attackpoint du player
+        attackPoint.SetActive(false);
 
         //On lance la fonction
         OnStateEnter();
@@ -147,20 +151,28 @@ public class PlayerSM : MonoBehaviour
 
                 animator.SetBool("ATTACK1", true);
 
+                attackPoint.SetActive(true);
+
                 break;
             case Player1State.ATTACK2:
 
                 animator.SetBool("ATTACK2", true);
+
+                attackPoint.SetActive(true);
 
                 break;
             case Player1State.ATTACK3:
 
                 animator.SetBool("ATTACK3", true);
 
+                attackPoint.SetActive(true);
+
                 break;
             case Player1State.ATTACK4:
 
                 animator.SetBool("ATTACK4", true);
+
+                attackPoint.SetActive(true);
 
                 break;
             case Player1State.SPRINT:
@@ -196,7 +208,7 @@ public class PlayerSM : MonoBehaviour
 
                 animator.SetBool("HURT", true);
 
-                TakeDamage(1);
+                //TakeDamage(1);
 
                 break;
             case Player1State.AIRHURT:
@@ -527,20 +539,28 @@ public class PlayerSM : MonoBehaviour
 
                 animator.SetBool("ATTACK1", false);
 
+                attackPoint.SetActive(false);
+
                 break;
             case Player1State.ATTACK2:
 
                 animator.SetBool("ATTACK2", false);
+
+                attackPoint.SetActive(false);
 
                 break;
             case Player1State.ATTACK3:
 
                 animator.SetBool("ATTACK3", false);
 
+                attackPoint.SetActive(false);
+
                 break;
             case Player1State.ATTACK4:
 
                 animator.SetBool("ATTACK4", false);
+
+                attackPoint.SetActive(false);
 
                 break;
             case Player1State.SPRINT:
@@ -643,30 +663,31 @@ public class PlayerSM : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        Destroy(gameObject);
+        GameManager.instance.Loose();
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            onCollision = true;
-
-            TransitionToState(Player1State.HURT);
-            Debug.Log(onCollision);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            onCollision = false;
-
-            TransitionToState(Player1State.IDLE);
-            Debug.Log(onCollision);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        onCollision = true;
+    //
+    //        TransitionToState(Player1State.HURT);
+    //        Debug.Log(onCollision);
+    //    }
+    //}
+    //
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Enemy")
+    //    {
+    //        onCollision = false;
+    //
+    //        TransitionToState(Player1State.IDLE);
+    //        Debug.Log(onCollision);
+    //    }
+    //}
 
 
 }

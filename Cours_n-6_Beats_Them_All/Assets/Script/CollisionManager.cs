@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    //[SerializeField] int damage = 1;
+    [SerializeField] int damage = 1;
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
