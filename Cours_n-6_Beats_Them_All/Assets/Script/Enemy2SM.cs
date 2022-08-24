@@ -150,6 +150,7 @@ public class Enemy2SM : MonoBehaviour
             case Enemy2Stat.DEATH:
                 rb2D.velocity = Vector2.zero;   
                 StartCoroutine(DestroyEnemy());
+               
 
                 break;
             default:
@@ -269,6 +270,8 @@ public class Enemy2SM : MonoBehaviour
     {
         //joue l'anim Death
         animator.SetBool("DEATH", true);
+        //
+        attackPoint.SetActive(false);
 
         //attend 2 second
         yield return new WaitForSeconds(2f);
@@ -311,7 +314,7 @@ public class Enemy2SM : MonoBehaviour
         #endregion
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage()
     {
         health -= damageAmount;
         if (health <= 0)
@@ -327,6 +330,7 @@ public class Enemy2SM : MonoBehaviour
         else
         {
             animator.SetBool("HURT",true);
+            Debug.Log(health);
         }
     }
 
