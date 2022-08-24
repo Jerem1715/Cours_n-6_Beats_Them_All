@@ -11,7 +11,7 @@ public class CollisionManager : MonoBehaviour
         // dégât de l'enemy
         if (collision.gameObject.tag=="Enemy")
         {
-            Debug.Log("enemy touché");
+            //Debug.Log("enemy touché");
             collision.gameObject.GetComponent<Enemy2SM>().TakeDamage(/*damage*/);
         }
 

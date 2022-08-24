@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private TextMeshProUGUI scoreUI;
+    //[SerializeField] GameObject winUI;
+    //[SerializeField] GameObject looseUI;
+
 
 
     private int score;
@@ -44,14 +47,14 @@ public class GameManager : MonoBehaviour
         //Time.timeScale = 0f;
     }
 
-    //public void AddScore(int amount) // amount => montant 
-    //{
-    //    score += amount;
+    public void AddScore(int amount) // amount => montant 
+    {
+        score += amount;
 
-    //    scoreUI.text = "score: " + score.ToString("d5");
-    //    //lz même opération
-    //    //scoreUI.text = $"score: {score.ToString("d5")}";
-    //}
+        //scoreUI.text = "score: " + score.ToString("d5");
+        //lz même opération
+        scoreUI.text = $"score: {score.ToString("d5")}";
+    }
 
 
 }
