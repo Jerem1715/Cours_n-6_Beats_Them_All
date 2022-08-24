@@ -95,7 +95,7 @@ public class Enemy2SM : MonoBehaviour
     void OnStateFixedUpdate()
     {
         distanceToPlayer = Vector2.Distance(player1.transform.position, transform.position);
-        Debug.Log("distance vers le player: " + distanceToPlayer);
+        //Debug.Log("distance vers le player: " + distanceToPlayer);
 
 
         switch (currentState)
@@ -105,7 +105,7 @@ public class Enemy2SM : MonoBehaviour
             case Enemy2Stat.WALK:
 
                 rb2D.velocity = dirMoveNormalized * walkSpeed;
-                Debug.Log("rb2d : " + rb2D.velocity);
+                //Debug.Log("rb2d : " + rb2D.velocity);
 
                 break;
             case Enemy2Stat.ATTACK1:
