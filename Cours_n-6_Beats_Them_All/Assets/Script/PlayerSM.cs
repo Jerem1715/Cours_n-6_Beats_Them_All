@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerSM : MonoBehaviour
@@ -49,6 +50,9 @@ public class PlayerSM : MonoBehaviour
 
     Vector2 dirInput;
 
+    bool onCollision;
+
+    [SerializeField] HealthBar healthBar;
 
     Rigidbody2D rb2D;
 
@@ -56,21 +60,19 @@ public class PlayerSM : MonoBehaviour
 
 
     [Header("HEALTH")]
-    [SerializeField] DataScriptable healthData;
     [SerializeField] TextMeshProUGUI lifeUI;
 
-    int health;
+    public int health;
+    public int healthMax;
 
     bool isDead;
 
     [Header("JUMP")]
-    
     [SerializeField] AnimationCurve jumpCurve;
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] float jumpDuration = 2f;
     Transform graphics;
     float jumpTimer;
-
 
 
     //Awake is called before Start
@@ -194,6 +196,8 @@ public class PlayerSM : MonoBehaviour
 
                 animator.SetBool("HURT", true);
 
+                TakeDamage(1);
+
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -214,6 +218,9 @@ public class PlayerSM : MonoBehaviour
             case Player1State.CANSPRINT:
                 break;
             case Player1State.DEATH:
+
+                StartCoroutine(Destroy());
+
                 break;
             case Player1State.VICTORY:
                 break;
@@ -254,14 +261,11 @@ public class PlayerSM : MonoBehaviour
                     TransitionToState(Player1State.JUMPUP);
                 }
 
-
-                //To Hurt
-                if (Input.GetKeyDown(KeyCode.F))
+                //To death
+                if (health <=0)
                 {
-                    TransitionToState(Player1State.HURT);
+                    TransitionToState(Player1State.DEATH);
                 }
-
-
 
                 break;
             case Player1State.WALK:
@@ -337,7 +341,7 @@ public class PlayerSM : MonoBehaviour
                 break;
             case Player1State.SPRINT:
 
-                if(!Input.GetKey(KeyCode.LeftShift))
+                if (!Input.GetKey(KeyCode.LeftShift))
                 {
                     TransitionToState(Player1State.WALK);
                 }
@@ -377,12 +381,6 @@ public class PlayerSM : MonoBehaviour
             case Player1State.GROUNDPOUND:
                 break;
             case Player1State.HURT:
-
-                if (!Input.GetKey(KeyCode.F))
-                {
-                    TransitionToState(Player1State.IDLE);
-                }
-
                 break;
             case Player1State.AIRHURT:
                 break;
@@ -456,7 +454,7 @@ public class PlayerSM : MonoBehaviour
 
                     graphics.localPosition = new Vector3(graphics.localPosition.x, y * jumpHeight, graphics.localPosition.z);
                 }
-                
+
 
                 break;
             case Player1State.JUMPMAX:
@@ -597,7 +595,9 @@ public class PlayerSM : MonoBehaviour
             case Player1State.CANSPRINT:
                 break;
             case Player1State.DEATH:
+
                 animator.SetBool("DEATH", false);
+
                 break;
             case Player1State.VICTORY:
                 break;
@@ -629,10 +629,46 @@ public class PlayerSM : MonoBehaviour
 
         TransitionToState(Player1State.IDLE);
     }
-  
-   
 
-    //ajout d'un score 
-    //GameManager.instance.AddScore(score);
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+        healthBar.UpdateHealth();
+    }
+
+
+    IEnumerator Destroy()
+    {
+        animator.SetBool("DEATH", true);
+
+        yield return new WaitForSeconds(2f);
+
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            onCollision = true;
+
+            TransitionToState(Player1State.HURT);
+            Debug.Log(onCollision);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            onCollision = false;
+
+            TransitionToState(Player1State.IDLE);
+            Debug.Log(onCollision);
+        }
+    }
+
 
 }
+
+

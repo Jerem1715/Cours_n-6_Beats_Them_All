@@ -21,7 +21,6 @@ public class HealthBar : MonoBehaviour
     // Actualise les points de vie pour rester entre 0 et hpmax
     public void UpdateHealth()
     {
-
         hp = Mathf.Clamp(playerSM.health, 0, playerSM.healthMax);
         float amount = (float)playerSM.health / playerSM.healthMax;
         healthbar.fillAmount = amount;
