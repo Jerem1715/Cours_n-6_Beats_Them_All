@@ -8,7 +8,7 @@ public class CollisionManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        // dégât de l'enemy
+        //dégât de l'enemy
         if (collision.gameObject.tag=="Enemy")
         {
             Debug.Log("enemy touché");
@@ -16,11 +16,11 @@ public class CollisionManager : MonoBehaviour
         }
 
         //dégât du player
-        //if (collision.gameObject.tag == "Player")
-        //{
-        //    Debug.Log("player touché");
-        //    collision.gameObject.GetComponent<PlayerSM>().TakeDamage(damage);
-        //}
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("player touché");
+            collision.gameObject.GetComponent<PlayerSM>().TakeDamage(damage);
+        }
 
 
     }
