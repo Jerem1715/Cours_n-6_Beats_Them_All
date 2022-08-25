@@ -1670,6 +1670,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemies_spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8723395273010539477, guid: 57b17de30123fb54e8d72fc4d66064aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b17de30123fb54e8d72fc4d66064aa, type: 3}
 --- !u!1 &1083672294
@@ -2959,6 +2963,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6938404358910356053, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
+      propertyPath: audioClip
+      value: 
+      objectReference: {fileID: 1778401978}
+    - target: {fileID: 6938404358910356053, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1552173935}
@@ -2966,6 +2974,14 @@ PrefabInstance:
       propertyPath: healthMax
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6938404358910356053, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
+      propertyPath: punchClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 01e25bea8770947a28e2fa9e5968a27b, type: 3}
+    - target: {fileID: 6938404358910356053, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
+      propertyPath: audioPlayer
+      value: 
+      objectReference: {fileID: 1778401978}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
 --- !u!114 &1618949363 stripped
@@ -3282,6 +3298,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6938404358910356043, guid: 2a6ac91fc1de104468442550cb575067, type: 3}
   m_PrefabInstance: {fileID: 1618949362}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1778401978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778401973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4af569f807f62442bfc2689640e6404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchClip: {fileID: 8300000, guid: 01e25bea8770947a28e2fa9e5968a27b, type: 3}
+  jumpClip: {fileID: 8300000, guid: 4211e97d55b9848ba9aa851e5bfac822, type: 3}
+  ambientClip: {fileID: 8300000, guid: 4996a3c723e244f00bf35da0a3398f75, type: 3}
 --- !u!1 &1796337877
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1974273958
 Transform:
   m_ObjectHideFlags: 0

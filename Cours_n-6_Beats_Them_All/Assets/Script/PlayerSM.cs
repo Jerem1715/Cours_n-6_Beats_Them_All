@@ -43,6 +43,8 @@ public class PlayerSM : MonoBehaviour
         CHARACTERSELECT
     }
 
+    [SerializeField] AudioPlayer audioPlayer;
+
 
     [SerializeField] Animator animator;
     [SerializeField] float speed;
@@ -98,6 +100,9 @@ public class PlayerSM : MonoBehaviour
 
         //On lance la fonction
         OnStateEnter();
+
+        //Lancement musique ambiance
+        audioPlayer.PlayAmbientSound();
     }
 
     // Update is called once per frame
@@ -153,12 +158,16 @@ public class PlayerSM : MonoBehaviour
 
                 attackPoint.SetActive(true);
 
+                audioPlayer.PlayPunchSound();
+
                 break;
             case Player1State.ATTACK2:
 
                 animator.SetBool("ATTACK2", true);
 
                 attackPoint.SetActive(true);
+
+                audioPlayer.PlayPunchSound();
 
                 break;
             case Player1State.ATTACK3:
@@ -167,12 +176,16 @@ public class PlayerSM : MonoBehaviour
 
                 attackPoint.SetActive(true);
 
+                audioPlayer.PlayPunchSound();
+
                 break;
             case Player1State.ATTACK4:
 
                 animator.SetBool("ATTACK4", true);
 
                 attackPoint.SetActive(true);
+
+                audioPlayer.PlayPunchSound();
 
                 break;
             case Player1State.SPRINT:
@@ -183,7 +196,10 @@ public class PlayerSM : MonoBehaviour
             case Player1State.JUMPUP:
 
                 jumpTimer = 0f;
+
                 animator.SetBool("JUMPUP", true);
+
+                audioPlayer.PlayJumpSound();
 
                 break;
             case Player1State.JUMPMAX:
@@ -274,7 +290,7 @@ public class PlayerSM : MonoBehaviour
                 }
 
                 //To death
-                if (health <=0)
+                if (health <= 0)
                 {
                     TransitionToState(Player1State.DEATH);
                 }
@@ -688,6 +704,26 @@ public class PlayerSM : MonoBehaviour
     //        Debug.Log(onCollision);
     //    }
     //}
+
+
+
+
+    #region ---Fonction Sound Test----
+
+    //public void PlayPunchSound()
+    //{
+    //    GameObject punchSound = new GameObject("PunchSound");
+    //    AudioSource audioSource = punchSound.AddComponent<AudioSource>();
+    //    audioSource.clip = punchClip;
+    //    audioSource.Play();
+    //
+    //    Destroy(punchSound, punchClip.length);
+    //}
+
+    #endregion
+
+
+
 
 
 }
