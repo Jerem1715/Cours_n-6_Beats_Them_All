@@ -1640,8 +1640,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1796337878}
   - component: {fileID: 1796337879}
-  - component: {fileID: 1796337880}
   - component: {fileID: 1796337881}
+  - component: {fileID: 1796337880}
+  - component: {fileID: 1796337882}
   m_Layer: 0
   m_Name: 100_Assets_LEVEL_1_BG
   m_TagString: Untagged
@@ -1766,6 +1767,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 119.9375, y: 2.972959}
   m_EdgeRadius: 0
+--- !u!68 &1796337882
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796337877}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -59.96875, y: 0}
+  - {x: 59.96875, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
 --- !u!1 &1808001073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,6 +1800,7 @@ GameObject:
   - component: {fileID: 1808001074}
   - component: {fileID: 1808001076}
   - component: {fileID: 1808001075}
+  - component: {fileID: 1808001077}
   m_Layer: 0
   m_Name: TilemapBgStreet
   m_TagString: Untagged
@@ -1887,6 +1911,32 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!61 &1808001077
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808001073}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -28.948261, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 58.896523, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1814251401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,33 +2637,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581653, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_Size.x
-      value: 1.9125364
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581653, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_Size.y
-      value: 3.0294962
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581653, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.049137503
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581653, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.06570315
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581654, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_TagString
-      value: AttackPointEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581655, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748002635414581655, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.05
+    - target: {fileID: 8748002635118599424, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68af35ebd6f415d4081ef89e3f7cc789, type: 3}
@@ -2760,7 +2786,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7941222240658750580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -54.82, y: -2.07, z: 0}
+  m_LocalPosition: {x: -54.45, y: -1.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

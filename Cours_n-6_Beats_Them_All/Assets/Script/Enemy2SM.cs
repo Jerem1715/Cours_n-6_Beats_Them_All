@@ -30,7 +30,7 @@ public class Enemy2SM : MonoBehaviour
     [Header("SPEED,RANGE")]
     [SerializeField] float walkSpeed = 2f; 
     [SerializeField] float detectionRadius = 3f;
-    [SerializeField] float attackDelay = 0.75f;
+    [SerializeField] float attackDelay = 1f;
     [SerializeField] float attackRange = 1f;
     [SerializeField] int health = 3;
     [SerializeField] int score = 750;
@@ -286,7 +286,7 @@ public class Enemy2SM : MonoBehaviour
         attackPoint.SetActive(false);
 
         //attend 2 second
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
        
         // détruit l"objet 
         Destroy(gameObject);
