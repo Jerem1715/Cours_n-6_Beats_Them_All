@@ -13,7 +13,7 @@ public class EnemiesSpawner : MonoBehaviour
 
     [SerializeField] float timerBetweenSpawn = 2f;
     [SerializeField] int spawnCount = 10;
-    [SerializeField] int startSpawnCount = 2    ;
+    [SerializeField] int startSpawnCount = 2;
     Vector2 enemyRandomToSpawn;
     float timer = 0f;
 
@@ -35,7 +35,7 @@ public class EnemiesSpawner : MonoBehaviour
         //Je crée une position aléatoire
          enemyRandomToSpawn= new Vector2(Random.Range(-xValue, xValue), Random.Range(-yValue, yValue));
 
-        //Je crée mon enemi
+        //Je crée mon enemy
         Instantiate(enemyPrefab, enemyRandomToSpawn, Quaternion.identity,enemyParent);
      
     }
@@ -48,7 +48,7 @@ public class EnemiesSpawner : MonoBehaviour
         timer += Time.deltaTime;
         //debug.Log(timer);
 
-        //Sapwn toutes les c secondes
+        //Sapwn toutes les s secondes
         if (timer >= timerBetweenSpawn)
         {
             CreateEnemy();

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         //scoreUI.text = "score: " + score.ToString("d5");
         //lz même opération
-        scoreUI.text = $"score: {score.ToString("d5")}";
+        scoreUI.text = $"score {score.ToString("d5")}";
     }
 
 
