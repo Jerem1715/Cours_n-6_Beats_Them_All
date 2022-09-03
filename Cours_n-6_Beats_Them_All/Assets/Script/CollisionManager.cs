@@ -20,5 +20,11 @@ public class CollisionManager : MonoBehaviour
         //    Debug.Log("player touché");
         //    collision.gameObject.GetComponent<PlayerSM>().TakeDamage(damage);
         //}
+
+        if (collision.gameObject.tag == "Boss")
+        {
+            Debug.Log("Boss touché");
+            //collision.gameObject.GetComponent<BossSM>()/*.TakeDamage(damage)*/;
+        }
     }
 }
